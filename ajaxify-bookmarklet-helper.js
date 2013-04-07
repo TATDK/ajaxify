@@ -2,7 +2,7 @@
     "use strict";
 
     // jQuery
-    window.jQuery || document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"><\/script>');
+    window.jQuery || document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"><\/script>');
 
     // History & ScrollTo (Wait for jQuery)
     var interval = setInterval(function () {
@@ -10,15 +10,15 @@
             clearInterval(interval);
 
             // History.js & ScrollTo.js
-            window.History || document.write('<script src="//browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"><\/script>');
-            jQuery.ScrollTo || document.write('<script src="//balupton.github.io/jquery-scrollto/scripts/jquery.scrollto.min.js"><\/script>');
+            window.History || document.write('<script src="http://browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"><\/script>');
+            jQuery.ScrollTo || document.write('<script src="http://balupton.github.io/jquery-scrollto/scripts/jquery.scrollto.min.js"><\/script>');
 
             interval = setInterval(function () {
                 if (window.History && window.History.initHtml4) {
                     clearInterval(interval);
 
                     // Ajaxify-html5.js
-                    document.write('<script src="//tatdk.github.io/ajaxify/ajaxify-html5.js"><\/script>');
+                    document.write('<script src="http://tatdk.github.io/ajaxify/ajaxify-html5.js"><\/script>');
 
                     interval = setInterval(function () {
                         if (jQuery.fn.ajaxify) {

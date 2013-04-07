@@ -1,27 +1,29 @@
 # Ajaxify
 Ajaxify your entire website instantly with this simple drop-in script using the HTML5 History API with History.js and jQuery ScrollTo.
 
+This is a rewrite by TAT to make menu URL lookup case insensitive.
+
 
 ## Installation
 
 ``` html
 <!-- jQuery --> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
  
 <!-- jQuery ScrollTo Plugin -->
-<script defer src="//balupton.github.com/jquery-scrollto/scripts/jquery.scrollto.min.js"></script>
+<script defer src="http://balupton.github.io/jquery-scrollto/scripts/jquery.scrollto.min.js"></script>
 
 <!-- History.js --> 
-<script defer src="//browserstate.github.com/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
+<script defer src="http://browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
 
 <!-- Ajaxify -->
-<script defer src="//raw.github.com/browserstate/ajaxify/master/ajaxify-html5.js"></script>  
+<script defer src="http://tatdk.github.io/ajaxify/ajaxify-html5.js"></script>  
 ```
 
 ## Bookmarklet
 
 ``` javascript
-javascript:var%20e=document.createElement('script');e.setAttribute('src','//raw.github.com/browserstate/ajaxify/master/ajaxify-bookmarklet-helper.js');document.body.appendChild(e);void(0);
+javascript:var%20e=document.createElement('script');e.setAttribute('src','http://tatdk.github.io/ajaxify/ajaxify-bookmarklet-helper.js');document.body.appendChild(e);void(0);
 ```
 
 Inspired by by https://gist.github.com/balupton/919358.

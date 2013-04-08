@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ajaxify by TATDK</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Ajaxify</h1>
+        <p class="header">Ajaxify your entire website instantly with this simple drop-in script using the HTML5 History API with History.js and jQuery ScrollTo.</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/TATDK/ajaxify/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/TATDK/ajaxify/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/TATDK/ajaxify">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/TATDK">TATDK</a></p>
+
+
+      </header>
+      <section>
+        <h1>Ajaxify</h1>
+
+<p>Ajaxify your entire website instantly with this simple drop-in script using the HTML5 History API with History.js and jQuery ScrollTo.</p>
+
+<p>This contains a modification by TAT to make menu URL lookup case insensitive.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre><span class="c">&lt;!-- jQuery --&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span> 
+
+<span class="c">&lt;!-- jQuery ScrollTo Plugin --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">defer</span> <span class="na">src=</span><span class="s">"http://balupton.github.io/jquery-scrollto/scripts/jquery.scrollto.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- History.js --&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">defer</span> <span class="na">src=</span><span class="s">"http://browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- Ajaxify --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">defer</span> <span class="na">src=</span><span class="s">"http://tatdk.github.io/ajaxify/ajaxify-html5.js"</span><span class="nt">&gt;&lt;/script&gt;</span>  
+</pre></div>
+
+<h2>Bookmarklet</h2>
+
+<div class="highlight"><pre><span class="nx">javascript</span><span class="o">:</span><span class="kd">var</span><span class="o">%</span><span class="mi">20</span><span class="nx">e</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span><span class="nx">e</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'src'</span><span class="p">,</span><span class="s1">'http://tatdk.github.io/ajaxify/ajaxify-bookmarklet-helper.js'</span><span class="p">);</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span><span class="k">void</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+
+<p>Inspired by by <a href="https://gist.github.com/balupton/919358">https://gist.github.com/balupton/919358</a>.</p>
+
+<h2>Explanation</h2>
+
+<h3>What do the installation instructions do?</h3>
+
+<ol>
+<li>Load in jQuery</li>
+<li>Load in the <a href="https://github.com/balupton/jquery-scrollto">jQuery ScrollTo Plugin</a> allowing our ajaxify gist to scroll nicely and smoothly to the new loaded in content</li>
+<li>Load in <a href="https://github.com/browserstate/history.js">History.js</a> with support for jQuery, HTML4 and HTML5</li>
+<li>Load in this gist :-)</li>
+</ol><h3>What does this gist do?</h3>
+
+<ol>
+<li><p>Check if History.js is enabled for our current browser, if it isn't then skip this gist.</p></li>
+<li><p>Create a way to detect our page's root url, so we can compare our links against it.</p></li>
+<li><p>Create a way to convert the ajax repsonse into a format jQuery will understand - as jQuery is only made to handle elements which go inside the body element, not elements made for the head element.</p></li>
+<li><p>Define our content and menu selectors, these are using when we load in new pages. We use our content selector to find our new content within the response, and replace the existing content on our current page. We use our menu selector to update the active navigation link in our menu when the page changes.</p></li>
+<li><p>Discover our internal links on our website, and upgrade them so when they are clicked it instead of changing the page to the new page, it will change our page's state to the new page. Links with the class <code>no-ajaxy</code> will not be upgraded.</p></li>
+<li>
+<p>When a page state change occurs, we will:</p>
+
+<ol>
+<li>Determine the absolute and relative urls from the new url</li>
+<li>Use our content selector to find our current page's content and fade it out</li>
+<li>Send off an ajax request to the absolute url</li>
+<li>Convert the response into one we can undertand</li>
+<li>Extract the response's title and set <code>document.title</code> and the title element to it</li>
+<li>Use our menu selector to find our page's menu, then scan for new page's url in the menu, and make that the active menu item and mark other menu items inactive</li>
+<li>Finish the current content's fadeout animation</li>
+<li>Use our menu selector to find the new page's content, and replace the current content with the new page's content</li>
+<li>Fade the new content in</li>
+<li>Scroll to the new current content so the user is directed to the right place - rather than them ending up looking at the footer or something instead of your page's content due to the height shift with the content change</li>
+<li>Inform Google Analytics and other tracking software about the page change</li>
+</ol>
+</li>
+</ol><h2>Using this Gist?</h2>
+
+<p><a href="https://github.com/browserstate/history.js/wiki/Showcase">Post your website in the showcase here!</a></p>
+
+<h2>Further Reading</h2>
+
+<ul>
+<li><a href="https://github.com/browserstate/history.js">The History.js Readme: Your guide to History.js</a></li>
+<li><a href="https://github.com/browserstate/history.js/wiki/Intelligent-State-Handling">Intelligent State Handling: The evolution from hashes, to hashbangs to the HTML5 History API</a></li>
+<li><a href="https://github.com/browserstate/history.js/wiki/The-State-of-the-HTML5-History-API">The state of the HTML5 History API, why it isn't good enough and why we need History.js</a></li>
+</ul><h2>History</h2>
+
+<ul>
+<li>v1.0.1 - 30 September, 2012
+
+<ul>
+<li>Added completion event (customisable via <code>completedEventName</code> defaults to <code>statechangecomplete</code>)</li>
+<li>Updated for new Google Analytics code - <a href="https://gist.github.com/854622#gistcomment-294951">credits to</a> <a href="https://github.com/aspiziri">aspiziri</a>
+</li>
+</ul>
+</li>
+</ul>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>

@@ -1,7 +1,7 @@
 # Ajaxify
 Ajaxify your entire website instantly with this simple drop-in script using the HTML5 History API with History.js and jQuery ScrollTo.
 
-This is a rewrite by TAT to make menu URL lookup case insensitive.
+This contains a modification by TAT to make menu URL lookup case insensitive.
 
 
 ## Installation
